@@ -1,0 +1,4 @@
+*.dat
+*.in
+var.txt
+/vtk
