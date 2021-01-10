@@ -97,8 +97,8 @@ vstr = strxx+strzz
 del strxx,strzz
 gc.collect()
 strxz = pd.read_table('strainxz.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
-# dispx = pd.read_table('dispx.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
-# dispz = pd.read_table('dispz.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
+dispx = pd.read_table('dispx.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
+dispz = pd.read_table('dispz.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
 # velx = pd.read_table('velx.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
 # velz = pd.read_table('velz.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
 
@@ -123,7 +123,16 @@ for i in range(nselem):
 celldatasetlines2 = ["{} {}{} {}\n".format("SCALARS","volstrain_max@",vstr_max_tim,"float")]        #@~は最大値をとる時刻
 
 ##--node data---##
+pointdatasetlines = ["{} {}\n".format("POINT_DATA",nnode)]
 
+pointdatasetlines1 = ["{} {} {}\n".format("VECTORS","disp@shearstrain_max","float")]        #nax~時のメッシュ変形用
+pointdata1 = []
+pointdatasetlines2 = ["{} {} {}\n".format("VECTORS","disp@volstrain_max","float")]
+pointdata2 = []
+
+for k in range(nnode):
+    pointdata1 += ["{} {} {}\n".format(dispx[k+1][strxz_absmax_tim],"0.0",dispz[k+1][strxz_absmax_tim])]
+    pointdata2 += ["{} {} {}\n".format(dispx[k+1][vstr_max_tim],"0.0",dispz[k+1][vstr_max_tim])]
 
 ##---write vtkfile---##
 os.makedirs("vtk",exist_ok=True)
@@ -140,6 +149,15 @@ with open("vtk/output.vtk","w") as f:
     f.writelines(cellset)       #define cells
     f.writelines(celltypes)     #"CELL_TYPES",nselem
     f.writelines(celltypesset)  #define celltype]
+    f.write("\n")
+
+    ##---node data---##
+    f.writelines(pointdatasetlines)        #"POINT_DATA",nnode
+
+    f.writelines(pointdatasetlines1)       #"VECTORS",dataname,dtype
+    f.writelines(pointdata1)
+    f.writelines(pointdatasetlines2)       #"VECTORS",dataname,dtype
+    f.writelines(pointdata2)
     f.write("\n")
 
     ###---cell data---###
