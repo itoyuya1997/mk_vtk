@@ -11,23 +11,23 @@ os.makedirs("vtk",exist_ok=True)
 ##--read files--##
 with open("var.txt") as f:
     lines = f.readlines()
-    modelid = lines[0].split()[0]
-    area_x = lines[1].split()[0]
-    area_z = lines[1].split()[1]
-    nx = lines[2].split()[0]
-    nz = lines[2].split()[1]
+    modelid = int(lines[0].split()[0])
+    area_x = int(lines[1].split()[0])
+    area_z = int(lines[1].split()[1])
+    nx = int(lines[2].split()[0])
+    nz = int(lines[2].split()[1])
     if modelid == 1:
-        nx1 = lines[3].split()[0]
-        nx2 = lines[3].split()[1]
-        nz1 = lines[4].split()[0]
-        nz2 = lines[4].split()[0]
+        nx2 = int(lines[3].split()[1])
+        nx1 = int(lines[3].split()[0])
+        nz1 = int(lines[4].split()[0])
+        nz2 = int(lines[4].split()[0])
         inputwave = lines[5].split()[1]
-        fsamp = lines[5].split()[2]
-        duration = lines[5].split()[3]
+        fsamp = int(lines[5].split()[2])
+        duration = float(lines[5].split()[3])
     else:
         inputwave = lines[3].split()[1]
-        fsamp = float(lines[3].split()[2])
-        duration = lines[3].split()[3]
+        fsamp = int(lines[3].split()[2])
+        duration = float(lines[3].split()[3])
 
 
 with open("mesh.in") as f:
@@ -94,7 +94,7 @@ dispz = pd.read_table('dispz.dat',header=None,sep="    ",engine='python')
 velx = pd.read_table('velx.dat',header=None,sep="    ",engine='python')
 velz = pd.read_table('velz.dat',header=None,sep="    ",engine='python')
 
-a =  200   #define read time interval
+a =  100   #define read time interval
 n = 1       #vtk file number
 
 ##---cell data---##
@@ -122,7 +122,7 @@ pointdata2 = []
 
 ##---write vtkfile---##
 
-for i in range(fsamp*duration):        #fsamp*duration
+for i in range(int(fsamp*duration)):        #fsamp*duration
     if i%a == 0:
         pointdata1.clear()
         pointdata2.clear()
@@ -130,12 +130,12 @@ for i in range(fsamp*duration):        #fsamp*duration
             pointdata1 += ["{} {} {}\n".format(dispx[k+1][i],"0.0",dispz[k+1][i])]
             pointdata2 += ["{} {} {}\n".format(velx[k+1][i],"0.0",velz[k+1][i])]
 
-        celldata1.clear()
-        celldata2.clear()
-        for j in range(nselem):
-            celldata0 += ["{}\n".format(elements[j][2])]
-            celldata1 += ["{}\n".format(strxz[j+1][i])]
-            celldata2 += ["{}\n".format(vstr[j+1][i])]
+        # celldata1.clear()
+        # celldata2.clear()
+        # for j in range(nselem):
+            # celldata0 += ["{}\n".format(elements[j][2])]
+            # celldata1 += ["{}\n".format(strxz[j+1][i])]
+            # celldata2 += ["{}\n".format(vstr[j+1][i])]
         outputvtk = "{}{}{}".format("vtk/series-",str(n).zfill(7),".vtk")
         n += 1
         with open(outputvtk,"w") as f:

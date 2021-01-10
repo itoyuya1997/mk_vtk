@@ -11,23 +11,23 @@ if os.path.dirname(__file__):       #currentdirectoryをfile位置にセット
 # with open("var.in") as f:
 with open("var.txt") as f:
     lines = f.readlines()
-    modelid = lines[0].split()[0]
-    area_x = lines[1].split()[0]
-    area_z = lines[1].split()[1]
-    nx = lines[2].split()[0]
-    nz = lines[2].split()[1]
+    modelid = int(lines[0].split()[0])
+    area_x = int(lines[1].split()[0])
+    area_z = int(lines[1].split()[1])
+    nx = int(lines[2].split()[0])
+    nz = int(lines[2].split()[1])
     if modelid == 1:
-        nx1 = lines[3].split()[0]
-        nx2 = lines[3].split()[1]
-        nz1 = lines[4].split()[0]
-        nz2 = lines[4].split()[0]
+        nx2 = int(lines[3].split()[1])
+        nx1 = int(lines[3].split()[0])
+        nz1 = int(lines[4].split()[0])
+        nz2 = int(lines[4].split()[0])
         inputwave = lines[5].split()[1]
-        fsamp = lines[5].split()[2]
-        duration = lines[5].split()[3]
+        fsamp = int(lines[5].split()[2])
+        duration = float(lines[5].split()[3])
     else:
         inputwave = lines[3].split()[1]
-        fsamp = float(lines[3].split()[2])
-        duration = lines[3].split()[3]
+        fsamp = int(lines[3].split()[2])
+        duration = float(lines[3].split()[3])
 
 
 with open("mesh.in") as f:
