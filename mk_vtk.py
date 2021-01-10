@@ -8,34 +8,26 @@ if os.path.dirname(__file__):       #currentdirectoryをfile位置にセット
     os.chdir(os.path.dirname(__file__))
 
 ##--read files--##
-with open("var.in") as f:
-# with open("var.txt") as f:
+# with open("var.in") as f:
+with open("var.txt") as f:
     lines = f.readlines()
-    modelid = lines[0][0]
-    area_x = lines[1][0]
-    area_z = lines[1][1]
-    nx = lines[2][0]
-    nz = lines[2][1]
+    modelid = lines[0].split()[0]
+    area_x = lines[1].split()[0]
+    area_z = lines[1].split()[1]
+    nx = lines[2].split()[0]
+    nz = lines[2].split()[1]
     if modelid == 1:
-        nx1 = lines[3][0]
-        nx2 = lines[3][1]
-        nz1 = lines[4][0]
-        nz2 = lines[4][0]
-        inputwave = lines[5][1]
-        fsamp = lines[5][2]
-        duration = lines[5][3]
+        nx1 = lines[3].split()[0]
+        nx2 = lines[3].split()[1]
+        nz1 = lines[4].split()[0]
+        nz2 = lines[4].split()[0]
+        inputwave = lines[5].split()[1]
+        fsamp = lines[5].split()[2]
+        duration = lines[5].split()[3]
     else:
-        inputwave = lines[3][1]
-        fsamp = float(lines[3][2])
-        duration = lines[3][3]
-
-print("fsamp=")
-print(fsamp)
-print("duration=")
-print(duration)
-print(nx)
-print(nz)       #上ミス
-
+        inputwave = lines[3].split()[1]
+        fsamp = float(lines[3].split()[2])
+        duration = lines[3].split()[3]
 
 
 with open("mesh.in") as f:
