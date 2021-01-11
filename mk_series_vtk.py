@@ -12,8 +12,8 @@ os.makedirs("vtk",exist_ok=True)
 with open("var.txt") as f:
     lines = f.readlines()
     modelid = int(lines[0].split()[0])
-    area_x = int(lines[1].split()[0])
-    area_z = int(lines[1].split()[1])
+    area_x = float(lines[1].split()[0])
+    area_z = float(lines[1].split()[1])
     nx = int(lines[2].split()[0])
     nz = int(lines[2].split()[1])
     if modelid == 1:
@@ -98,7 +98,6 @@ a =  100   #define read time interval
 n = 1       #vtk file number
 
 ##---cell data---##
-"""
 celldatasetlines = ["{} {}\n".format("CELL_DATA",nselem)]
 celldatasetlines0 = ["{} {} {}\n".format("SCALARS","materialid","int")]
 celldata0 = []
@@ -108,7 +107,6 @@ celldata1 = []
 
 celldatasetlines2 = ["{} {} {}\n".format("SCALARS","volstrain","float")]
 celldata2 = []
-"""
 
 
 ##--node data---##
@@ -130,12 +128,13 @@ for i in range(int(fsamp*duration)):        #fsamp*duration
             pointdata1 += ["{} {} {}\n".format(dispx[k+1][i],"0.0",dispz[k+1][i])]
             pointdata2 += ["{} {} {}\n".format(velx[k+1][i],"0.0",velz[k+1][i])]
 
-        # celldata1.clear()
-        # celldata2.clear()
-        # for j in range(nselem):
-            # celldata0 += ["{}\n".format(elements[j][2])]
-            # celldata1 += ["{}\n".format(strxz[j+1][i])]
-            # celldata2 += ["{}\n".format(vstr[j+1][i])]
+        celldata0.clear()
+        celldata1.clear()
+        celldata2.clear()
+        for j in range(nselem):
+            celldata0 += ["{}\n".format(elements[j][2])]
+            celldata1 += ["{}\n".format(strxz[j+1][i])]
+            celldata2 += ["{}\n".format(vstr[j+1][i])]
         outputvtk = "{}{}{}".format("vtk/series-",str(n).zfill(7),".vtk")
         n += 1
         with open(outputvtk,"w") as f:
@@ -158,7 +157,7 @@ for i in range(int(fsamp*duration)):        #fsamp*duration
             f.writelines(pointdata1)
             f.writelines(pointdatasetlines2)       #"VECTORS",dataname,dtype
             f.writelines(pointdata2)
-"""
+
             ###---cell data---###
             f.writelines(celldatasetlines)        #"CELL_DATA",nselem
 
@@ -173,4 +172,3 @@ for i in range(int(fsamp*duration)):        #fsamp*duration
             f.writelines(celldatasetlines2)       #"SCALARS",dataname,dtype
             f.writelines("LOOKUP_TABLE default\n")      #data　reference
             f.writelines(celldata2)
-"""
