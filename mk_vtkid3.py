@@ -137,7 +137,7 @@ for k in range(nnode):
 
 ##---write vtkfile---##
 os.makedirs("vtk",exist_ok=True)
-with open("vtk/output2.vtk","w") as f:
+with open("vtk/outputid3.vtk","w") as f:
 
     ###---mesh---###
     f.write("# vtk DataFile Version 3.0\n")
