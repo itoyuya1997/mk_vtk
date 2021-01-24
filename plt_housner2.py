@@ -21,8 +21,8 @@ fig = plt.figure(figsize=(6,4),dpi=300)
 
 
 for vs in vs_list1:
-    dispzdir = "./finite"+vs+"/dispz.dat"
-    vardir = "./finite"+vs+"/var.txt"
+    dispzdir = "./finite/"+vs+"/dispz.dat"
+    vardir = "./finite/"+vs+"/var.txt"
     var = pd.read_table(vardir,sep=" ",header=None,engine='python').tail(1)
     fsamp = float(var.iloc[0,0])
     duration = float(var.iloc[0,1])
@@ -45,8 +45,8 @@ for vs in vs_list1:
     plt.clf()
 
 for vs in vs_list2:
-    dispzdir = "./micro"+vs+"/dispz.dat"
-    vardir = "./micro"+vs+"/var.txt"
+    dispzdir = "./micro/"+vs+"/dispz.dat"
+    vardir = "./micro/"+vs+"/var.txt"
     var = pd.read_table(vardir,sep=" ",header=None,engine='python').tail(1)
     fsamp = float(var.iloc[0,0])
     duration = float(var.iloc[0,1])

@@ -84,7 +84,7 @@ for i in range(nselem):
 
 
 ##---read table--##
-#time column省き，indexは0始まり
+#time column省き，ilocのindexは0始まり
 # strxx = pd.read_table('strainxx.dat',header=None,sep="    ",engine='python')
 # strzz = pd.read_table('strainzz.dat',header=None,sep="    ",engine='python')
 # vstr = strxx+strzz
@@ -96,7 +96,7 @@ dispz = pd.read_table('dispz.dat',header=None,sep="    ",engine='python')
 # velx = pd.read_table('velx.dat',header=None,sep="    ",engine='python')
 # velz = pd.read_table('velz.dat',header=None,sep="    ",engine='python')
 
-a =  100   #define read time interval
+a =  200   #define read time interval
 n = 1       #vtk file number
 
 ##---cell data---##
