@@ -39,7 +39,7 @@ for vs in vs_list1:
     ax1 = fig.add_subplot(1,1,1,xlabel=r"$x\mathrm{[m]}$",ylabel=r"$normalized displacement$",xmargin=0,ymargin=0)
     ax1.set_yticks([])
     ax1.plot(x1,normalized_sr,c="k",linestyle="solid")
-    filename = "static2"+vs+"f.png"
+    filename = "housner2"+vs+"f.png"
     fig.savefig(filename, bbox_inches="tight", pad_inches=0.05)
     # plt.show()
     plt.clf()
@@ -63,7 +63,7 @@ for vs in vs_list2:
     ax1 = fig.add_subplot(1,1,1,xlabel=r"$x\mathrm{[m]}$",ylabel=r"$normalized displacement$",xmargin=0,ymargin=0)
     ax1.set_yticks([])
     ax1.plot(x1,normalized_sr,c="k",linestyle="solid")
-    filename = "static2"+vs+".png"
+    filename = "housner2"+vs+".png"
     fig.savefig(filename, bbox_inches="tight", pad_inches=0.05)
     # plt.show()
     plt.clf()

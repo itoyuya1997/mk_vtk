@@ -10,8 +10,8 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
 
-vs_list1 = ["vs0"]
-vs_list2 = ["vs0m"]
+vs_list1 = ["finite/vs0"]
+vs_list2 = ["micro/vs0m"]
 
 
 dispz_data1 = []
@@ -32,7 +32,7 @@ plt.rcParams['ytick.direction'] = 'in'
 
 ###mode-1
 fig = plt.figure(figsize=(6,4),dpi=300)
-ax1 = fig.add_subplot(1,1,1,xlabel=r"$time\mathrm{[s]}$",ylabel=r"$displacement\mathrm{[m]}$",xmargin=0,ylim=(-0.03,0.03))
+ax1 = fig.add_subplot(1,1,1,xlabel=r"$time\mathrm{[s]}$",ylabel=r"$displacement\mathrm{[m]}$",xmargin=0)
 # ax1.xaxis.set_major_locator(mpl.ticker.MultipleLocator(10))
 ax1.plot(tim,dispz,c="r",linestyle="solid")
 # plt.legend(edgecolor="None",facecolor="None")

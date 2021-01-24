@@ -26,7 +26,7 @@ dispz_data1 = []
 dispz_data2 = []
 
 for vs in vs_list1:
-    dir = "./"+vs+"/dispz.dat"
+    dir = "./micro/"+vs+"/dispz.dat"
     maxdispz = pd.read_table(dir,header=None,usecols=[1],sep="    ",engine='python').max()
     dispz_data1.append(maxdispz.iloc[0])
     if vs in vs_list2:

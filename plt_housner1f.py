@@ -7,10 +7,11 @@ import matplotlib.pyplot as plt
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-L = 5
+L = 5      #width(full)
 n = 0.3
 
 d_dic = {0.3:0.003066,0.5:0.004183,0.7:0.0071671,0.9:0.021552,1.0:2.189240}
+# d_dic = {0.3:0.006105,0.5:0.007581,0.7:0.0143404,0.9:0.043534,1.0:2.189240}       #5*10
 d = d_dic[n]
 #FD mode
 vs_list1 = ["vs0","vs1","vs2","vs3","vs4","vs5","vs10","vs50","vs100"]
@@ -26,7 +27,7 @@ dispz_data1 = []
 dispz_data2 = []
 
 for vs in vs_list1:
-    dir = "./"+vs+"/dispz.dat"
+    dir = "./finite/"+vs+"/dispz.dat"
     maxdispz = pd.read_table(dir,header=None,usecols=[1],sep="    ",engine='python').max()
     dispz_data1.append(maxdispz.iloc[0])
     if vs in vs_list2:
