@@ -27,7 +27,7 @@ def ricker(tim,fp,tp,amp):
     t1 = ((tim-tp)*np.pi*fp)**2
     return (2*t1-1)*np.exp(-t1)*amp
 
-mode = 0
+mode = 2
 
 if mode == 0:       ##housner
     wavename = "tapered_sin"
@@ -58,6 +58,16 @@ elif mode == 1:     ##housner v2
     wave_vel = np.cumsum(wave_acc) * dt
     ntim = len(tim)
 
+elif mode == 2:
+    wavename = "ricker"
+    fsamp = 4000
+    duration = 8.0
+
+    tim,dt = np.linspace(0,duration,int(fsamp*duration),endpoint=False,retstep=True)
+    wave_acc = ricker(tim,fp=1.0,tp=1.0,amp=2.0)
+    wave_vel = np.cumsum(wave_acc) * dt
+    ntim = len(tim)
+
 
 # elif mode == 2:     #seisemic
 #     wavefilename = "CHB008.vel"
@@ -74,8 +84,8 @@ plt.rcParams['font.family'] ='Times New Roman'
 plt.rcParams['xtick.direction'] = 'in'
 plt.rcParams['ytick.direction'] = 'in'
 fig = plt.figure(figsize=(6,4),dpi=300)
-ax1 = fig.add_subplot(1,1,1,xlabel=r"$time\mathrm{[s]}$",ylabel=r"$acceleration\mathrm{[m/s^2]}$",xmargin=0)
-ax1.xaxis.set_major_locator(mpl.ticker.MultipleLocator(10))
+ax1 = fig.add_subplot(1,1,1,xlabel=r"$time\mathrm{[s]}$",ylabel=r"$acceleration\mathrm{[m/s^2]}$",xmargin=0,ylim=(-2.5,2.5))
+# ax1.xaxis.set_major_locator(mpl.ticker.MultipleLocator(10))
 # ax1.yaxis.set_major_locator(mpl.ticker.LinearLocator(5))
 ax1.plot(tim,wave_acc,label="input wave",c="r",linestyle="solid")
 plt.legend(edgecolor="None",facecolor="None")
