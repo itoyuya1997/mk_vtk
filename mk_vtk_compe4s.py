@@ -8,13 +8,14 @@ import os
 if os.path.dirname(__file__):       #currentdirectoryをfile位置にセット
     os.chdir(os.path.dirname(__file__))
 
-dir = "./id3rifp0.5tp2.5amp2.0/finite/vs0/"
-dir1 = "./id3rifp1.0tp2.5amp2.0/finite/vs0/"
-dir2 = "./id3rifp2.0tp2.5amp2.0fs5000/finite/vs0/"
-label= "fp=0.5[Hz]"
-label1= "fp=1.0[Hz]"
-label2= "fp=2.0[Hz]"
-
+dir = "./id3rifp1.0tp2.5amp2.0/finite/vs0/"
+dir1 = "./id3rifp1.0tp2.5amp2.0/finite/vs1/"
+dir2 = "./id3rifp1.0tp2.5amp2.0/finite/vs2/"
+dir3 = "./id3rifp1.0tp2.5amp2.0/finite/vs3/"
+label= "Vs=0[m/s]"
+label1= "Vs=1[m/s]"
+label2= "Vs=2[m/s]"
+label3= "Vs=3[m/s]"
 
 plt.rcParams['font.family'] ='Times New Roman'
 plt.rcParams['xtick.direction'] = 'in'
@@ -71,6 +72,22 @@ dispz2 = pd.read_table(dir2+'dispz.dat',header=None,sep="    ",usecols=list(rang
 
 strxz_absmax_tim2 = strxz2.abs().max(axis=1).idxmax()
 vstr_max_tim2 = vstr2.max(axis=1).idxmax()      #最大volstrainのindex
+
+strxx3 = pd.read_table(dir3+'strainxx.dat',header=None,sep="    ",usecols=list(range(1,43)),engine='python')
+strzz3 = pd.read_table(dir3+'strainzz.dat',header=None,sep="    ",usecols=list(range(1,43)),engine='python')
+vstr3 = strxx3+strzz3
+del strxx3,strzz3
+gc.collect()
+strxz3 = pd.read_table(dir3+'strainxz.dat',header=None,sep="    ",usecols=list(range(1,43)),engine='python')
+dispx3 = pd.read_table(dir3+'dispx.dat',header=None,sep="    ",usecols=list(range(1,43)),engine='python')
+dispz3 = pd.read_table(dir3+'dispz.dat',header=None,sep="    ",usecols=list(range(1,43)),engine='python')
+# velx = pd.read_table('velx.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
+# velz = pd.read_table('velz.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
+
+strxz_absmax_tim3 = strxz3.abs().max(axis=1).idxmax()
+vstr_max_tim3 = vstr3.max(axis=1).idxmax()      #最大volstrainのindex
+
+
 #make plot
 fig = plt.figure(figsize=(10,4),dpi=300)
 ax1 = fig.add_subplot(1,1,1,xlabel=r"$x\mathrm{[m]}$",ylabel=r"$shear strain$",xlim=(0,210))
@@ -79,6 +96,7 @@ x1 = _x1+dx/2
 ax1.plot(x1,strxz.iloc[strxz_absmax_tim,:42],c="g",linestyle="solid",label=label)
 ax1.plot(x1,strxz1.iloc[strxz_absmax_tim1,:42],c="b",linestyle="solid",label=label1)
 ax1.plot(x1,strxz2.iloc[strxz_absmax_tim2,:42],c="r",linestyle="solid",label=label2)
+ax1.plot(x1,strxz3.iloc[strxz_absmax_tim3,:42],c="#a65628",linestyle="solid",label=label3)
 plt.legend(edgecolor="None",facecolor="None")
 filename = "shearst-c.png"
 fig.savefig(filename, bbox_inches="tight", pad_inches=0.05)
@@ -89,6 +107,7 @@ ax1 = fig.add_subplot(1,1,1,xlabel=r"$x\mathrm{[m]}$",ylabel=r"$volume strain$",
 ax1.plot(x1,vstr.iloc[vstr_max_tim,:42],c="m",linestyle="solid",label=label )
 ax1.plot(x1,vstr1.iloc[vstr_max_tim1,:42],c="c",linestyle="solid",label=label1 )
 ax1.plot(x1,vstr2.iloc[vstr_max_tim2,:42],c="y",linestyle="solid",label=label2 )
+ax1.plot(x1,vstr3.iloc[vstr_max_tim3,:42],c="#ff7f00",linestyle="solid",label=label3 )
 plt.legend(edgecolor="None",facecolor="None")
 filename = "volst-c.png"
 fig.savefig(filename, bbox_inches="tight", pad_inches=0.05)

@@ -64,7 +64,7 @@ elif mode == 2:
     duration = 8.0
 
     tim,dt = np.linspace(0,duration,int(fsamp*duration),endpoint=False,retstep=True)
-    wave_acc = ricker(tim,fp=1.0,tp=1.0,amp=2.0)
+    wave_acc = ricker(tim,fp=1.0,tp=2.5,amp=2.0)
     wave_vel = np.cumsum(wave_acc) * dt
     ntim = len(tim)
 
