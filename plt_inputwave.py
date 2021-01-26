@@ -84,7 +84,8 @@ plt.rcParams['font.family'] ='Times New Roman'
 plt.rcParams['xtick.direction'] = 'in'
 plt.rcParams['ytick.direction'] = 'in'
 fig = plt.figure(figsize=(6,4),dpi=300)
-ax1 = fig.add_subplot(1,1,1,xlabel=r"$time\mathrm{[s]}$",ylabel=r"$acceleration\mathrm{[m/s^2]}$",xmargin=0,ylim=(-2.5,2.5))
+ax1 = fig.add_subplot(1,1,1,xlabel="time[s]",ylabel=r"acceleration$\mathrm{[m/s^2]}$",xmargin=0)
+# ax1 = fig.add_subplot(1,1,1,xlabel="time[s]",ylabel=r"acceleration$\mathrm{[m/s^2]}$",xmargin=0,ylim=(-2.5,2.5))
 # ax1.xaxis.set_major_locator(mpl.ticker.MultipleLocator(10))
 # ax1.yaxis.set_major_locator(mpl.ticker.LinearLocator(5))
 ax1.plot(tim,wave_acc,label="input wave",c="r",linestyle="solid")
