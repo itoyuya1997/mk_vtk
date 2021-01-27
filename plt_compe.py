@@ -8,6 +8,9 @@ import os
 if os.path.dirname(__file__):       #currentdirectoryをfile位置にセット
     os.chdir(os.path.dirname(__file__))
 
+#vstr,strxz比較プロット
+
+
 dir = "./id3rifp0.5tp2.5amp2.0/finite/vs0/"
 dir1 = "./id3rifp1.0tp2.5amp2.0/finite/vs0/"
 dir2 = "./id3rifp2.0tp2.5amp2.0fs5000/finite/vs0/"

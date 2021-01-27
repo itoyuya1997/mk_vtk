@@ -118,7 +118,7 @@ for i in range(nselem):
 celldatasetlines1 = ["{} {}{} {}\n".format("SCALARS","shearstrain_max@",strxz_absmax_tim,"float")]
 
 celldata2 = []
-vstr_max_tim = vstr.max(axis=1).idxmax()      #最大volstrainのindex
+vstr_max_tim = vstr.abs().max(axis=1).idxmax()      #最大volstrainのindex
 for i in range(nselem):
     celldata2 += ["{}\n".format(vstr.iloc[vstr_max_tim,i])]
 celldatasetlines2 = ["{} {}{} {}\n".format("SCALARS","volstrain_max@",vstr_max_tim,"float")]        #@~は最大値をとる時刻

@@ -42,7 +42,7 @@ strxz = pd.read_table(dir+'strainxz.dat',header=None,sep="    ",usecols=list(ran
 # # velz = pd.read_table('velz.dat',header=None,sep="    ",usecols=lambda x: x not in[0],engine='python')
 
 strxz_absmax_tim = strxz.abs().max(axis=1).idxmax()
-vstr_max_tim = vstr.max(axis=1).idxmax()      #最大volstrainのindex
+vstr_max_tim = vstr.abs().max(axis=1).idxmax()      #最大volstrainのindex
 
 
 strxx1 = pd.read_table(dir1+'strainxx.dat',header=None,sep="    ",usecols=list(range(1,43)),engine='python')
