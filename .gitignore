@@ -2,3 +2,4 @@
 *.in
 var.txt
 /vtk
+.vscode/

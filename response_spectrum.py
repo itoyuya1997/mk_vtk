@@ -3,18 +3,17 @@ import matplotlib.pyplot as plt
 import os
 
 def main():
-    rho = 1750  #kg/m^3
-    L = 5  #rectangle tank width/2
-    D = 5      #depth
-    n = 0.9
+    rho = 1000  #kg/m^3
+    L = 2.5     #rectangle tank width/2
+    D = 5       #depth
+    n = 0.5     #周波数倍率
 
 
     M = rho*2*L*D
     m = M*0.83*np.tanh(1.6*D/L)/1.6/D*L     #M1
     k = 3*m**2*9.8*D/M/L/L
     # f = 1/(2*np.pi)*np.sqrt(k/m)
-    # f = 0.392
-    f = 0.2669
+    f = 0.39244
     h = 0.0        #attenuation
     c = 2 * np.sqrt(m*k)*h
     dt = 0.01
@@ -50,17 +49,13 @@ def main():
     Maxacc.append(np.max(np.abs(Zacc)))
 
     d = 0.84*a*(k*L/m/9.8)/(1-a/L*(k*L/m/9.8)**2)
-    d1 = 0.84*a*(k/m)/(1-a/L*(k*L/m/9.8)**2)
 
-    print("f=",f)
-    print("n=",n)
-    print("m1",m)
-    print("k1",k)
-    print("A1=",a)
-    print("d=",d)
-    print("d_gg=",d1)
-
-    # print("d="d)
+    print("f=",f)   #1次スロッシング周波数
+    print("n=",n)   #周波数倍率
+    print("m1",m)   #振動質量
+    print("k1",k)   #振動バネ
+    print("A1=",a)  #相対変位振幅
+    print("d=",d)   #壁面鉛直変位
 
     Maxdisb=np.array(Maxdisb)
     # plt.figure()
