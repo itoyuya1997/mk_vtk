@@ -26,8 +26,8 @@ elif mode == 1:
         input2 = "./MD/vs"+str(vs)+"z.disp"
         maxdispz1 = pd.read_table(input1,header=None,usecols=[1],sep=" ",engine='python').max()
         maxdispz2 = pd.read_table(input2,header=None,usecols=[1],sep=" ",engine='python').max()
-        dispz_list1.append(maxdispz1)
-        dispz_list2.append(maxdispz2)
+        FDdispz_list.append(maxdispz1)
+        MDdispz_list.append(maxdispz2)
 
 
 ###---plot graph---###
@@ -43,8 +43,8 @@ ax1.scatter(0,housner,marker="x",label="Housner Theory",c="b",s=50,clip_on=False
 if mode == 0:
     ax1.plot(vs_list,dispz_list,label="Simultion results",c="g",linestyle="solid",marker=".",ms=5)
 elif mode == 1:
-    ax1.plot(vs_list,dispz_list1,label="finite deformation",c="g",linestyle="solid",marker=".",ms=5)
-    ax1.plot(vs_list,dispz_list2,label="micro deformation",c="r",linestyle="solid",marker=".",ms=5)
+    ax1.plot(vs_list,FDdispz_list,label="finite deformation",c="g",linestyle="solid",marker=".",ms=5)
+    ax1.plot(vs_list,MDdispz_list,label="micro deformation",c="r",linestyle="solid",marker=".",ms=5)
 plt.legend(edgecolor="None",facecolor="None", borderaxespad=0)
 
 
